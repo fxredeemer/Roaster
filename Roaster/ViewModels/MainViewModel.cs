@@ -5,7 +5,6 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -16,9 +15,11 @@ namespace Roaster.ViewModels
     {
         int TaskCount { get; set; }
         string ButtonText { get; }
-        SeriesCollection CPULoad { get; set; }
-        int TotalThreadCount { get; }
+        SeriesCollection CPULoad { get; }
+        AxesCollection YAxis { get; }
+        AxesCollection XAxis { get; }
 
+        int TotalThreadCount { get; }
         void StartStop();
     }
 
@@ -30,6 +31,8 @@ namespace Roaster.ViewModels
         private bool roast;
 
         public SeriesCollection CPULoad { get; set; }
+        public AxesCollection YAxis { get; set; }
+        public AxesCollection XAxis { get; set; }
 
         public MainViewModel()
         {
@@ -53,6 +56,23 @@ namespace Roaster.ViewModels
         private void InitializeCPUGraph()
         {
             CPULoad = new SeriesCollection();
+            YAxis = new AxesCollection()
+            {
+                new Axis()
+                {
+                    MinValue = 0,
+                    MaxValue = 100,
+                }
+            };
+
+            XAxis = new AxesCollection()
+            {
+                new Axis()
+                {
+                    Labels = Array.Empty<string>(),
+                    Title = "Time"
+                }
+            };
 
             for (int i = 0; i < Environment.ProcessorCount; i++)
             {

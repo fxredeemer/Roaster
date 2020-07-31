@@ -4,18 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:adonis="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
-        xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-        xmlns:local="clr-namespace:Roaster.Views"
         mc:Ignorable="d"
         Title="Roaster" Height="350" Width="500" MinHeight="300" MinWidth="450">
     <DockPanel Margin="8" LastChildFill="True">
-        <DockPanel DockPanel.Dock="Top" LastChildFill="True">
-            <TextBlock Margin="0 0 8 0">Task Count</TextBlock>
-            <TextBlock DockPanel.Dock="Right" Text="{Binding TaskCount}"/>
+        <DockPanel DockPanel.Dock="Top" LastChildFill="True" Margin="0 8">
+            <TextBlock Margin="0 0 8 0" VerticalAlignment="Center" DockPanel.Dock="Left">Task Count</TextBlock>
+            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding TaskCount}"/>
+            <Button x:Name="StartStop" DockPanel.Dock="Right" Content="{Binding ButtonText, FallbackValue=Roast}"/>
             <Slider x:Name="TaskCount" Minimum="1" Maximum="{Binding TotalThreadCount}" Margin="0 0 8 0"/>
         </DockPanel>
-        <Button x:Name="StartStop" DockPanel.Dock="Top" Content="{Binding ButtonText, FallbackValue=Roast}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <lvc:CartesianChart DockPanel.Dock="Bottom" Margin="0, 0, 0, 0" Series="{Binding CPULoad}" Hoverable="False" DataTooltip="{x:Null}"/>
+        <DockPanel>
+            <Label DockPanel.Dock="Top">CPU Load</Label>
+            <lvc:CartesianChart DockPanel.Dock="Bottom" Margin="0, 0, 0, 0" AxisX="{Binding XAxis}" AxisY="{Binding YAxis}" Series="{Binding CPULoad}" Hoverable="False" DataTooltip="{x:Null}"/>
+        </DockPanel>
     </DockPanel>
 </adonis:AdonisWindow>
