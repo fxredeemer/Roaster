@@ -13,7 +13,7 @@
             <TextBlock Margin="0 0 8 0" VerticalAlignment="Center" DockPanel.Dock="Left">Task Count</TextBlock>
             <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding TaskCount}"/>
             <Button Command="{s:Action StartStop}" DockPanel.Dock="Right" Content="{Binding ButtonText, FallbackValue=Roast}"/>
-            <Slider x:Name="TaskCount" Value="{Binding TaskCount}" Minimum="1" Maximum="{Binding TotalThreadCount}" Margin="0 0 8 0"/>
+            <Slider Value="{Binding TaskCount}" Minimum="1" Maximum="{Binding TotalThreadCount}" Margin="0 0 8 0"/>
         </DockPanel>
         <DockPanel>
             <Label DockPanel.Dock="Top">CPU Load</Label>
