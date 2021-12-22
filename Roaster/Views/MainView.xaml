@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:adonis="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
+        xmlns:s="https://github.com/canton7/Stylet"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="Roaster" Height="350" Width="500" MinHeight="300" MinWidth="450">
@@ -11,8 +12,8 @@
         <DockPanel DockPanel.Dock="Top" LastChildFill="True" Margin="0 8">
             <TextBlock Margin="0 0 8 0" VerticalAlignment="Center" DockPanel.Dock="Left">Task Count</TextBlock>
             <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding TaskCount}"/>
-            <Button x:Name="StartStop" DockPanel.Dock="Right" Content="{Binding ButtonText, FallbackValue=Roast}"/>
-            <Slider x:Name="TaskCount" Minimum="1" Maximum="{Binding TotalThreadCount}" Margin="0 0 8 0"/>
+            <Button Command="{s:Action StartStop}" DockPanel.Dock="Right" Content="{Binding ButtonText, FallbackValue=Roast}"/>
+            <Slider x:Name="TaskCount" Value="{Binding TaskCount}" Minimum="1" Maximum="{Binding TotalThreadCount}" Margin="0 0 8 0"/>
         </DockPanel>
         <DockPanel>
             <Label DockPanel.Dock="Top">CPU Load</Label>
