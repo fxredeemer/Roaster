@@ -1,60 +1,23 @@
-﻿using Caliburn.Micro;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
+﻿using Roaster.ViewModels;
+using Stylet;
+using StyletIoC;
 using System.Windows;
 using System.Windows.Threading;
-using Roaster.ViewModels;
 
 namespace Roaster
 {
-    internal class MainBootStrapper : BootstrapperBase
+    internal class MainBootStrapper : Bootstrapper<MainViewModel>
     {
-        private IServiceProvider container;
-
-        protected override void Configure()
+        protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
-            var containerBuilder = new ServiceCollection();
+            base.ConfigureIoC(builder);
 
-            containerBuilder.AddSingleton<IEventAggregator, EventAggregator>();
-            containerBuilder.AddSingleton<IWindowManager, WindowManager>();
-
-            containerBuilder.AddTransient<IMainViewModel, MainViewModel>();
-
-            container = containerBuilder.BuildServiceProvider();
+            builder.Bind<IMainViewModel>().To<MainViewModel>();
         }
 
-        protected override void OnExit(object sender, EventArgs e)
+        protected override void OnUnhandledException(DispatcherUnhandledExceptionEventArgs e)
         {
-            base.OnExit(sender, e);
-        }
-
-        public MainBootStrapper()
-        {
-            Initialize();
-        }
-
-        protected override void OnStartup(object sender, StartupEventArgs e)
-        {
-            DisplayRootViewFor<IMainViewModel>();
-        }
-
-        protected override object GetInstance(Type service, string key)
-        {
-            if (service == null)
-                throw new ArgumentNullException(nameof(service));
-
-            return container.GetService(service);
-        }
-
-        protected override IEnumerable<object> GetAllInstances(Type service)
-        {
-            return container.GetServices(service);
-        }
-
-        protected override void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            e.Handled = true;
+            base.OnUnhandledException(e);
 
             MessageBox.Show(e.Exception.Message, "An error as occurred", MessageBoxButton.OK);
         }

@@ -1,4 +1,4 @@
-﻿using Caliburn.Micro;
+﻿using Stylet;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;

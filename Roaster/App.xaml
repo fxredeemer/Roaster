@@ -1,16 +1,17 @@
 ﻿<Application x:Class="Roaster.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="https://github.com/canton7/Stylet"
              xmlns:local="clr-namespace:Roaster">
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary>
-                    <local:MainBootStrapper x:Key="bootstrapper" />
-                </ResourceDictionary>
+        <s:ApplicationLoader>
+            <s:ApplicationLoader.Bootstrapper>
+                <local:MainBootStrapper/>
+            </s:ApplicationLoader.Bootstrapper>
+            <s:ApplicationLoader.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/AdonisUI;component/ColorSchemes/Dark.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/AdonisUI.ClassicTheme;component/Resources.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+            </s:ApplicationLoader.MergedDictionaries>
+        </s:ApplicationLoader>
     </Application.Resources>
 </Application>
